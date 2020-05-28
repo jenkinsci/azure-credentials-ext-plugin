@@ -18,10 +18,8 @@ can be found when using the credential types provided by the plugin.
 
 This credential is compatible with the existing bindings provided by the Credentials Binding Plugin
 
-In pipelines, there're two ways to construct this binding:
-
 ```groovy
-withCredentials([usernamePassword(credentialsId: 'credentials_id', usernameVariable: 'username', passwordVariable: 'password')]) {
+withCredentials([usernamePassword(credentialsId: 'keyvault_credentials_id', usernameVariable: 'username', passwordVariable: 'password')]) {
     // your code goes here
 }
 ```
@@ -30,10 +28,8 @@ withCredentials([usernamePassword(credentialsId: 'credentials_id', usernameVaria
 
 This credential is compatible with the existing bindings provided by the Credentials Binding Plugin
 
-In pipelines, there're two ways to construct this binding:
-
 ```groovy
-withCredentials([sshUserPrivateKey(credentialsId: 'credentials_id', usernameVariable: 'username', keyFileVariable: 'keyfile')]) {
+withCredentials([sshUserPrivateKey(credentialsId: 'keyvault_credentials_id', usernameVariable: 'username', keyFileVariable: 'keyfile')]) {
     // your code goes here
 }
 ```
