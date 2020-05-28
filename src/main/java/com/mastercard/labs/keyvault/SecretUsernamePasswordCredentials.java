@@ -9,6 +9,8 @@ import hudson.Extension;
 import hudson.util.Secret;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.Constructor;
+import org.yaml.snakeyaml.constructor.SafeConstructor;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
@@ -50,7 +52,7 @@ public class SecretUsernamePasswordCredentials extends SecretStringCredentials i
         if (username == null) {
             try {
                 final KeyVaultSecret secretBundle = getKeyVaultSecret();
-                Yaml parser = new Yaml();
+                Yaml parser = new Yaml(new SafeConstructor());
                 Map<String, Object> parsed = parser.load(secretBundle.getValue());
                 username = Secret.fromString(parsed.get(fieldUsername).toString());
                 password = Secret.fromString(parsed.get(fieldPassword).toString());

@@ -11,6 +11,7 @@ import org.jenkins.ui.icon.IconSet;
 import org.jenkins.ui.icon.IconType;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.SafeConstructor;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;
@@ -66,7 +67,7 @@ public class SecretSSHUserPrivateKeyCredentials extends SecretStringCredentials 
         if (username == null) {
             try {
                 final KeyVaultSecret secretBundle = getKeyVaultSecret();
-                Yaml parser = new Yaml();
+                Yaml parser = new Yaml(new SafeConstructor());
                 Map<String, Object> parsed = parser.load(secretBundle.getValue());
                 username = Secret.fromString(parsed.get(fieldUsername).toString());
                 privateKey = Secret.fromString(parsed.get(fieldPrivateKey).toString());
